@@ -1,0 +1,5 @@
+# My NixOS Configurations
+
+Trying to find ways to declaratively set up my systems, and basically back up, at least, the package configurations by system.
+
+I *could* just use one config file (see my dotfiles repo) but I'd rather be able to re-roll stuff as needed, or if I buy a new laptop/hard drive, and just run this config to bring back the state.
