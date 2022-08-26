@@ -55,7 +55,7 @@
   # set sddm settings:
   services.xserver.displayManager.sddm.settings = {
     Theme = {
-    CursorTheme = "Breeze";
+    CursorTheme = "breeze_cursors";
     };
     };
 
@@ -92,6 +92,10 @@
   #   isNormalUser = true;
   #   extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   # };
+  users.users.arin = {
+  	isNormalUser = true;
+	extraGroups = [ "wheel" ];
+	};
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
