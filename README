@@ -1,4 +1,4 @@
-# My NixOS Configurations
+My NixOS Configurations
 
 Trying to find ways to declaratively set up my systems, and basically back up, at least, the package configurations by system.
 
