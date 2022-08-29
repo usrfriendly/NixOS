@@ -1,13 +1,16 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
+#
+# This is intended as my generic settings, and calls various other files to aid in per-system configuration
 { config, pkgs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./packages.nix
+      ./desktop.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -43,22 +46,19 @@
   #   font = "Lat2-Terminus16";
   #   keyMap = "us";
   # };
+  
+  # Enable dri
+  hardware.opengl.driSupport = true;
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
 
   # Enable the Plasma 5 Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
 
-  # set sddm settings:
-  services.xserver.displayManager.sddm.settings = {
-    Theme = {
-    CursorTheme = "breeze_cursors";
-    };
-    };
 
+  # Enable flatpak
+  services.flatpak.enable = false;
 
   # Configure keymap in X11
   # services.xserver.layout = "us";
@@ -69,7 +69,7 @@
 
   # Enable sound.
   # sound.enable = true;
-  # hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
   enable = true;
@@ -78,11 +78,11 @@
   pulse.enable = true;
   # If you want to use JACK applications, uncomment this
   jack.enable = true;
-
   # use the example session manager (no others are packaged yet so this is enabled by default,
   # no need to redefine it in your config for now)
   #media-session.enable = true;
 };
+  hardware.opengl.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -96,26 +96,26 @@
   	isNormalUser = true;
 	extraGroups = [ "wheel" ];
 	};
+  # Enable virtualisation (bri'ish innit?)
+	
 
+  # set neovim as default
+  programs.neovim.enable = true;
+  programs.neovim.defaultEditor = true;	
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
      ark
      bash-completion
-     bitwarden
      bluezFull
      firefox
      git
      helvum
-     kdeplasma-addons
+     libGL
      neovim
-     plasma-desktop
-     qjackctl
+     ntfs3g
      sddm-kcm
-     spotify
-     vim
-     vscode
    ];
    programs.steam.enable = true;
 
